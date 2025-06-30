@@ -13,7 +13,7 @@ export async function fetchNotes(searchText: string, page: number, tag?: string)
         },
         params: {
             page,
-            perPage: 10,
+            perPage: 12,
             ...(searchText && { search: searchText }),
             ...(tag && { tag }),
         }

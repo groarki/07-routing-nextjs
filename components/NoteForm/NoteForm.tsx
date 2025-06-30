@@ -47,9 +47,6 @@ const fieldId = useId()
         }
       });
     };
-
-    
-    
 return <Formik
         initialValues={initialValues}
         onSubmit={handleCreateNote}

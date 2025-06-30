@@ -1,5 +1,6 @@
 'use client'
-import css from './notes.module.css'
+import css from "./error.module.css"
+
 type ErrorProp = {
     error: Error
     reset: () => void

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import css from "./Header.module.css"
-import TagsMenu from "../TagsMenu/TagsMenu";
 
 const Header = () => {
   return (
@@ -14,12 +13,13 @@ const Header = () => {
             <Link href="/">Home</Link>
           </li>
           <li>
-            <TagsMenu/>
+            <Link href="/notes/filter/all">Notes</Link>
+          </li>
+          <li>
           </li>
         </ul>
       </nav>
     </header>
-
     );
   };
   

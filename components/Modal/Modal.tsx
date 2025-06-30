@@ -1,23 +1,31 @@
-import { createPortal } from "react-dom"
-import NoteForm from "../NoteForm/NoteForm"
-import css from "./NoteModal.module.css"
-import { useEffect } from "react"
+'use client';
 
-interface NoteModalProps {
-    onClose: () => void
+import { useRouter } from 'next/navigation';
+import { createPortal } from "react-dom"
+import css from "./Modal.module.css"
+import React, { useCallback, useEffect } from "react"
+
+interface ModalProps {
+  children: React.ReactNode,
+  onClose: () => void
 }
-export default function NoteModal({ onClose }: NoteModalProps) {
+export default function Modal({ children, onClose}: ModalProps) {
+  const router = useRouter();
+  
+  const close = useCallback(() => {
+    router.back();
+  }, [router]);
 
     const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
         if (event.target === event.currentTarget) {
-          onClose();
+          close();
         }
     };
     
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
           if (e.key === "Escape") {
-            onClose();
+            close();
           }
         };
         
@@ -28,15 +36,19 @@ export default function NoteModal({ onClose }: NoteModalProps) {
           document.removeEventListener("keydown", handleKeyDown);
           document.body.style.overflow = "";
         };
-    }, [onClose]);
+    }, [close]);
     
     
     return createPortal(
     <div className={css.backdrop} role="dialog" aria-modal="true" onClick={handleBackdropClick}>
         <div className={css.modal}>
-            <NoteForm onClose={onClose}/>
+        {children}
+        <button onClick={close}>Close</button>
         </div>
     </div>,
     document.body
     )
 };
+
+
+
