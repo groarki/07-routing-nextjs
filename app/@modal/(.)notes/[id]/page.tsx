@@ -1,5 +1,5 @@
 import { getSingleNote } from "@/lib/api";
-import NotesPreviewClient from "./NotesPreview.client";
+import NotesPreviewClient from "./NotePreview.client";
 
 type Props = {
   params: Promise<{ id: string }>;
