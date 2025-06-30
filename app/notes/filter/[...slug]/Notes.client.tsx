@@ -52,7 +52,7 @@ const NotesClient = ({notes, currentTag}: NotesClientProps) => {
           Create note +
         </button>
       </header>
-      {isModalOpen && <Modal>
+      {isModalOpen && <Modal onClose={() => setIsModalOpen(false)}>
         <NoteForm onClose={() => setIsModalOpen(false)}/>
       </Modal>}
       {data && <NoteList notes={data.notes} />}
