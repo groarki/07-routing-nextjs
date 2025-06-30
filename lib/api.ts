@@ -6,7 +6,7 @@ const token = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN
 
 
 
-export async function fetchNotes(searchText: string, page: number) {
+export async function fetchNotes(searchText: string, page: number, tag?: string) {
     const res = await axios.get<fetchNotesResponse>("/notes", {
         headers: {
             Authorization: `Bearer ${token}`,
@@ -15,6 +15,7 @@ export async function fetchNotes(searchText: string, page: number) {
             page,
             perPage: 10,
             ...(searchText && { search: searchText }),
+            ...(tag && { tag }),
         }
     });
     return res.data
@@ -48,3 +49,15 @@ export async function deleteNote(id: number) {
     });
      return res.data
 };
+
+// export async function getNotesByTag(tag: string) {
+    
+//     const res = await axios.get<fetchNotesResponse>(`/notes/`, {
+//         headers: {
+//             Authorization: `Bearer ${token}`
+//         },
+//         params: tag ? { tag } : undefined,
+//     });
+//     console.log('API response:', res.data);
+//     return res.data.notes
+// };
