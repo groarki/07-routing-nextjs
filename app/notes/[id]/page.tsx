@@ -7,16 +7,18 @@ import { getSingleNote } from "@/lib/api";
 import NoteDetailsClient from "./NoteDetails.client";
 
 type NoteDetailsProps = {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: number }>;
 };
 
 const NoteDetails = async ({ params }: NoteDetailsProps) => {
   const { id } = await params;
   const queryClient = new QueryClient();
 
+  const noteId = Number(id)
+
   await queryClient.prefetchQuery({
-    queryKey: ["note", id],
-    queryFn: () => getSingleNote(id),
+    queryKey: ["note", noteId],
+    queryFn: () => getSingleNote(noteId),
   });
 
   return (
