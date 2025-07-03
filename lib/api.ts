@@ -21,7 +21,7 @@ export async function fetchNotes(searchText: string, page: number, tag?: string)
     return res.data
 };
 
-export const getSingleNote = async (id: string) => {
+export const getSingleNote = async (id: number) => {
     const res = await axios.get<Note>(`/notes/${id}`, {
         headers: {
             Authorization: `Bearer ${token}`,
